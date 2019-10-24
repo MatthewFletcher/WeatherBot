@@ -18,16 +18,16 @@ class WeatherBot:
         return f"https://api.weather.gov/points/{self.lat},{self.lon}"
 
     def getData(self):
-        self.dump = requests.get(_buildURL)
+        '''
+        Performs a GET request to the server
+        Params: None
+        Returns: True if success, false if otherwise
+        '''
+        self.dump = requests.get(_buildURL).json()
+        return self.dump.status_code == 200
 
-        if self.dump.status_code == 404:
-            sys.stderr.write("Error accessing URL, check URL format\n")
-            return False
-        else if self.dump.status_code = 200:
-            return True
-    
-
-
+    def getHourly(self):
+        requests.get(self.dump['properties']['hourly'])
 
 def main():
     pass
